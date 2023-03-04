@@ -1,0 +1,2 @@
+# sirakaba_godot4_game_template
+自分用Godot4のゲームテンプレート
