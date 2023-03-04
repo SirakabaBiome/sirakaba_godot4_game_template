@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1l0k2tm65vn"]
+
+[ext_resource type="Script" path="res://Scene/System/Option/credit_list_.gd" id="1_0nadn"]
+
+[node name="Credit_List" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+script = ExtResource("1_0nadn")
+
+[node name="Content" type="Label" parent="."]
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "もののなまえ"
+autowrap_mode = 3
+
+[node name="Author" type="Label" parent="."]
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "作者のなまえ"
+autowrap_mode = 3
+
+[node name="License" type="Button" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "ライセンス"
+
+[node name="HPURL" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "HP"

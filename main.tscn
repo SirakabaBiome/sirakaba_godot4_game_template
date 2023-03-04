@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://coc8tihdey8tb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_diopc"]
+[ext_resource type="PackedScene" uid="uid://bpg2nm0l2enwm" path="res://Scene/System/Option/option_menu.tscn" id="1_edhil"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_diopc")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Option_Menu" parent="UI" instance=ExtResource("1_edhil")]
+visible = false
+
+[node name="Menu_Button" type="Button" parent="UI"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "メニュー"
+
+[connection signal="pressed" from="UI/Menu_Button" to="." method="_on_menu_button_pressed"]

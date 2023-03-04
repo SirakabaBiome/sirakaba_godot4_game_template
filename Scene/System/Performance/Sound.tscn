@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://drfq4o1de75dw"]
+
+[ext_resource type="Script" path="res://Scene/System/Performance/Sound.gd" id="1_vx674"]
+
+[node name="Sound" type="Node"]
+script = ExtResource("1_vx674")
+
+[node name="Map_BGM" type="Node" parent="."]
+
+[node name="BGM_1" type="AudioStreamPlayer" parent="Map_BGM"]
+volume_db = -50.0
+bus = &"BGM"
+
+[node name="BGM_2" type="AudioStreamPlayer" parent="Map_BGM"]
+volume_db = -50.0
+bus = &"BGM"
+
+[node name="BGM_3" type="AudioStreamPlayer" parent="Map_BGM"]
+volume_db = -50.0
+bus = &"BGM"
+
+[node name="Event_BGM" type="Node" parent="."]
+
+[node name="BGM_1" type="AudioStreamPlayer" parent="Event_BGM"]
+volume_db = -50.0
+bus = &"BGM"
+
+[node name="BGM_2" type="AudioStreamPlayer" parent="Event_BGM"]
+volume_db = -50.0
+bus = &"BGM"
+
+[node name="BGM_3" type="AudioStreamPlayer" parent="Event_BGM"]
+volume_db = -50.0
+bus = &"BGM"
+
+[node name="Battle_BGM" type="Node" parent="."]
+
+[node name="BGM_1" type="AudioStreamPlayer" parent="Battle_BGM"]
+volume_db = -50.0
+bus = &"BGM"

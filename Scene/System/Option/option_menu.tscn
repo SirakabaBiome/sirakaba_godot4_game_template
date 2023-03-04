@@ -1,0 +1,232 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpg2nm0l2enwm"]
+
+[ext_resource type="Script" path="res://Scene/System/Option/option_menu.gd" id="1_kxb2r"]
+[ext_resource type="Script" path="res://Scene/System/Option/Sound.gd" id="2_cswos"]
+[ext_resource type="Script" path="res://Scene/System/Option/Visual.gd" id="3_b6ws8"]
+[ext_resource type="Script" path="res://Scene/System/Option/Save_Load.gd" id="4_dpy6c"]
+[ext_resource type="Script" path="res://Scene/System/Option/Credit.gd" id="5_oin61"]
+
+[node name="Option_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kxb2r")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 10.0
+offset_right = -50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sound" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("2_cswos")
+
+[node name="Sound_Container" type="VBoxContainer" parent="TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = -20.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ALL" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Sound_Container/ALL"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "ALL"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Master" type="HSlider" parent="TabContainer/Sound/Sound_Container/ALL"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -60.0
+max_value = -1.0
+value = -1.0
+
+[node name="BGM" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Sound_Container/BGM"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "BGM"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BGM" type="HSlider" parent="TabContainer/Sound/Sound_Container/BGM"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -60.0
+max_value = -1.0
+value = -1.0
+
+[node name="BGS" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Sound_Container/BGS"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "BGS"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BGS" type="HSlider" parent="TabContainer/Sound/Sound_Container/BGS"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -60.0
+max_value = -1.0
+value = -1.0
+
+[node name="ME" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Sound_Container/ME"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "ME"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ME" type="HSlider" parent="TabContainer/Sound/Sound_Container/ME"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -60.0
+max_value = -1.0
+value = -1.0
+
+[node name="SE" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Sound_Container/SE"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "SE"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SE" type="HSlider" parent="TabContainer/Sound/Sound_Container/SE"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -60.0
+max_value = -1.0
+value = -1.0
+
+[node name="VOICE" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/Sound_Container/VOICE"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "SE"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VOICE" type="HSlider" parent="TabContainer/Sound/Sound_Container/VOICE"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -60.0
+max_value = -1.0
+value = -1.0
+
+[node name="Visual" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("3_b6ws8")
+
+[node name="Visual_Container" type="VBoxContainer" parent="TabContainer/Visual"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 15.0
+offset_right = -100.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Flash" type="CheckButton" parent="TabContainer/Visual/Visual_Container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "点滅表現が許可されています"
+
+[node name="Save&Load" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("4_dpy6c")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Save&Load"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = -20.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Save_Slot_List" type="VBoxContainer" parent="TabContainer/Save&Load/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Credit" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("5_oin61")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Credit"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = -20.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Credit_Slot_List" type="VBoxContainer" parent="TabContainer/Credit/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="drag_ended" from="TabContainer/Sound/Sound_Container/ALL/Master" to="TabContainer/Sound" method="_on_volume_drag_ended" binds= ["Master"]]
+[connection signal="value_changed" from="TabContainer/Sound/Sound_Container/ALL/Master" to="TabContainer/Sound" method="_on_value_changed" binds= ["Master"]]
+[connection signal="drag_ended" from="TabContainer/Sound/Sound_Container/BGM/BGM" to="TabContainer/Sound" method="_on_volume_drag_ended" binds= ["BGM"]]
+[connection signal="value_changed" from="TabContainer/Sound/Sound_Container/BGM/BGM" to="TabContainer/Sound" method="_on_value_changed" binds= ["BGM"]]
+[connection signal="drag_ended" from="TabContainer/Sound/Sound_Container/BGS/BGS" to="TabContainer/Sound" method="_on_volume_drag_ended" binds= ["BGS"]]
+[connection signal="value_changed" from="TabContainer/Sound/Sound_Container/BGS/BGS" to="TabContainer/Sound" method="_on_value_changed" binds= ["BGS"]]
+[connection signal="drag_ended" from="TabContainer/Sound/Sound_Container/ME/ME" to="TabContainer/Sound" method="_on_volume_drag_ended" binds= ["ME"]]
+[connection signal="value_changed" from="TabContainer/Sound/Sound_Container/ME/ME" to="TabContainer/Sound" method="_on_value_changed" binds= ["ME"]]
+[connection signal="drag_ended" from="TabContainer/Sound/Sound_Container/SE/SE" to="TabContainer/Sound" method="_on_volume_drag_ended" binds= ["SE"]]
+[connection signal="value_changed" from="TabContainer/Sound/Sound_Container/SE/SE" to="TabContainer/Sound" method="_on_value_changed" binds= ["SE"]]
+[connection signal="drag_ended" from="TabContainer/Sound/Sound_Container/VOICE/VOICE" to="TabContainer/Sound" method="_on_volume_drag_ended" binds= ["VOICE"]]
+[connection signal="value_changed" from="TabContainer/Sound/Sound_Container/VOICE/VOICE" to="TabContainer/Sound" method="_on_value_changed" binds= ["VOICE"]]
+[connection signal="toggled" from="TabContainer/Visual/Visual_Container/Flash" to="TabContainer/Visual" method="_on_flash_toggled"]

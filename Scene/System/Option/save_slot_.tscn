@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://bofxsgewq1lfr"]
+
+[ext_resource type="Texture2D" uid="uid://cdyknpxqa7qpt" path="res://icon.svg" id="1_ctadt"]
+[ext_resource type="Script" path="res://Scene/System/Option/save_slot.gd" id="1_cx26l"]
+
+[node name="Save_Slot_" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+script = ExtResource("1_cx26l")
+
+[node name="Thumbnail" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Thumb_IMG" type="TextureRect" parent="Thumbnail"]
+custom_minimum_size = Vector2(356, 200)
+layout_mode = 2
+texture = ExtResource("1_ctadt")
+
+[node name="Info" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slot_Name" type="Label" parent="Info"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "セーブスロット_"
+
+[node name="Player_Name" type="Label" parent="Info"]
+layout_mode = 2
+text = "プレイヤーの名前"
+
+[node name="Map_Name" type="Label" parent="Info"]
+layout_mode = 2
+text = "町の名前"
+
+[node name="MarginContainer" type="MarginContainer" parent="Info"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Total_PlayTime" type="Label" parent="Info"]
+layout_mode = 2
+text = "合計プレイ時間"
+
+[node name="Save_Date" type="Label" parent="Info"]
+layout_mode = 2
+text = "セーブした日"
+
+[node name="Button" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Save" type="Button" parent="Button"]
+layout_mode = 2
+text = "セーブ"
+
+[node name="Load" type="Button" parent="Button"]
+layout_mode = 2
+text = "ロード"
+
+[connection signal="pressed" from="Button/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Button/Load" to="." method="_on_load_pressed"]
