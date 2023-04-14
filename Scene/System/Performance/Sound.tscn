@@ -4,6 +4,15 @@
 
 [node name="Sound" type="Node"]
 script = ExtResource("1_vx674")
+bgm_node_list = {
+"battle": [NodePath("Battle_BGM/BGM_1")],
+"event": [NodePath("Event_BGM/BGM_1"), NodePath("Event_BGM/BGM_2"), NodePath("Event_BGM/BGM_3")],
+"map": [NodePath("Map_BGM/BGM_1"), NodePath("Map_BGM/BGM_2"), NodePath("Map_BGM/BGM_3")]
+}
+loop_se_node_root = NodePath("SE")
+loop_VOICE_node_root = NodePath("VOICE")
+bgs_node_list = [NodePath("BGS/BGS_1"), NodePath("BGS/BGS_2")]
+voice_node = [NodePath("VOICE/VOICE_1")]
 
 [node name="Map_BGM" type="Node" parent="."]
 
@@ -38,3 +47,37 @@ bus = &"BGM"
 [node name="BGM_1" type="AudioStreamPlayer" parent="Battle_BGM"]
 volume_db = -50.0
 bus = &"BGM"
+
+[node name="SE" type="Node" parent="."]
+
+[node name="Loop_SE_1" type="AudioStreamPlayer" parent="SE"]
+bus = &"SE"
+
+[node name="Timer" type="Timer" parent="SE/Loop_SE_1"]
+one_shot = true
+
+[node name="Loop_SE_2" type="AudioStreamPlayer" parent="SE"]
+bus = &"SE"
+
+[node name="Timer" type="Timer" parent="SE/Loop_SE_2"]
+one_shot = true
+
+[node name="SE" type="AudioStreamPlayer" parent="SE"]
+
+[node name="BGS" type="Node" parent="."]
+
+[node name="BGS_1" type="AudioStreamPlayer" parent="BGS"]
+volume_db = -20.0
+bus = &"BGS"
+
+[node name="BGS_2" type="AudioStreamPlayer" parent="BGS"]
+bus = &"BGS"
+
+[node name="VOICE" type="Node" parent="."]
+
+[node name="VOICE_1" type="AudioStreamPlayer" parent="VOICE"]
+pitch_scale = 0.01
+
+[node name="Loop_VOICE_1" type="AudioStreamPlayer" parent="VOICE"]
+
+[node name="Timer" type="Timer" parent="VOICE/Loop_VOICE_1"]

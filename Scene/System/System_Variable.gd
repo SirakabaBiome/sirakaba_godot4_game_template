@@ -7,12 +7,12 @@ var in_option_enabled = true
 
 var system_value = {
 	"Sound":{
-		"Master": -6,
-		"BGM": -1,
-		"BGS": -1,
-		"ME": -1,
-		"SE": -1,
-		"VOICE": -1
+		"Master": 0.6,
+		"BGM": 0.95,
+		"BGS": 0.95,
+		"ME": 0.95,
+		"SE": 0.95,
+		"VOICE": 0.95
 	},
 	"Visual":{
 		"Flash": true

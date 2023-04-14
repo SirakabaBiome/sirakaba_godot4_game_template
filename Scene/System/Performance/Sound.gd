@@ -1,12 +1,14 @@
 extends Node
 
-var map_bgm_node_list = []
-var event_bgm_node_list = []
-var battle_bgm_node_list = []
-var bgm_node_list = {}
+@export var bgm_node_list : Dictionary
+@export var loop_se_node_root : NodePath
+@export var loop_VOICE_node_root : NodePath
+@export var bgs_node_list : Array
+@export var voice_node : Array
 var bgm_type = ""
-var in_debug = false
+var in_debug : bool = false
 
+# node_list_setup : bgm_node_listのノードを全部get_nodeする
 # bgm_play_debug : テスト用
 # bgm_resource_debug : デバッグ用。リソースリストをコンソールに吐き出す
 # bgm_play : BGMを再生する
@@ -26,14 +28,15 @@ func _ready():
 	node_list_setup()
 
 func node_list_setup():
-	map_bgm_node_list = [$Map_BGM/BGM_1,$Map_BGM/BGM_2,$Map_BGM/BGM_3] # ノードリスト作成
-	event_bgm_node_list = [$Event_BGM/BGM_1,$Event_BGM/BGM_2,$Event_BGM/BGM_3] # ノードリスト作成
-	battle_bgm_node_list = [$Battle_BGM/BGM_1]
-	bgm_node_list = {
-			"map" : map_bgm_node_list,
-			"event" : event_bgm_node_list,
-			"battle" : battle_bgm_node_list
-		}
+	var node_value_list = bgm_node_list.values()
+	var node_key_list = bgm_node_list.keys()
+	for i in bgm_node_list.size():
+		var array = []
+		var list = node_value_list[i]
+		var key = node_key_list[i]
+		for n in list.size():
+			array.append(get_node(list[n]))
+		bgm_list_assign(array,key)
 
 func bgm_play_debug():
 	pass
@@ -42,7 +45,8 @@ func bgm_resource_debug():
 	#　デバッグ用 in_debugをfalseにすると実行されない
 	if in_debug == false:
 		return
-	var list_name = ["Map_BGM","Event_BGM","Battle_BGM"]
+	var list_name = bgm_node_list.keys()
+	print("BGMタイプ：" + bgm_type)
 	for i in bgm_node_list.size():
 		var array = bgm_node_list.values()
 		var list = array[i]
@@ -59,30 +63,39 @@ func bgm_resource_debug():
 
 func bgm_play(path,type):
 	# マップBGMとイベントBGMはここで再生する
-	var list
+	var list = bgm_node_list[type]
 	var is_true = false # レジューム処理が入るか入らないか
-	list = bgm_node_list[type]
+	var now_bgm_list
+	var bgm_node_list_values = bgm_node_list.values()
 	if not bgm_type == "":
+		now_bgm_list = bgm_node_list[bgm_type]
 		if not type == bgm_type:
 			bgm_stop(bgm_node_list[bgm_type])
-	for i in list.size(): # 直近で再生したか見る
-		var node = list[i] # リストからノードを取得する
-		if node.stream: # ノードにリソースが入っているか
-			if node.stream.resource_path == path: # ノードのリソースと今回再生したいリソースが同じか
-				is_true = true # 同じなので新規再生の処理を挟まなくする
-				if node.stream_paused: # ノードがポーズ中か
-						var node_2 = list[-1] # リストで一番最近再生したノードを取得する
+	for i in bgm_node_list.size(): # 直近で再生したか見る
+		var node_list = bgm_node_list_values[i]
+		var finish = false
+		for n in node_list.size():
+			var node = node_list[n] # リストからノードを取得する
+			if node.stream: # ノードにリソースが入っているか
+				if node.stream.resource_path == path: # ノードのリソースと今回再生したいリソースが同じか
+					is_true = true # 同じなので新規再生の処理を挟まなくする
+					if node.stream_paused: # ノードがポーズ中か
+						var node_2 = now_bgm_list[-1] # リストで一番最近再生したノードを取得する
 						if node_2 == node: # 同じだったらこれ以降の処理は不要
-							break
+							return
 						if node_2.playing: 
 							bgm_fade(node_2, "out") # 再生されていたら止める
 						bgm_fade(node,"in") 
 						node.stream_paused = false # 再生する
 						list.erase(node) # リストから削除して
 						list.append(node) # 一番最近再生したことにする
+						finish = true
 						break
-				else: # ポーズ中なら無視する
-					break
+					else: # ポーズ中なら無視する
+						finish = true
+						break
+		if finish:
+			break
 	if is_true: # 同じなので新規再生の処理を挟まなくする
 		bgm_list_assign(list,type) # リストを大元のやつに入れ直す
 		bgm_resource_debug() # 削除しても良い
@@ -110,15 +123,17 @@ func bgm_fade(node,type):
 		"in":
 			if node.volume_db > -50:
 				return
-			await get_tree().create_tween().tween_property(node, "volume_db", -1, 3).finished # ３秒かけて音を大きくする
+#			await get_tree().create_tween().tween_property(node, "volume_db", -1, 3).finished # ３秒かけて音を大きくする
+			get_tree().create_tween().tween_property(node, "volume_db", -1, 3)
+			await get_tree().create_timer(3).timeout
 		"out":
 			if node.volume_db < -1:
 				return
 			await get_tree().create_tween().tween_property(node, "volume_db", -50, 3).finished # ３秒かけて音を小さくする
 			node.stream_paused = true # ポーズモードにする
 
-func bgm_stop(list):
-	var node = list[-1] # 再生するとしたら一番最近のにあるので取得する
+func bgm_stop(list:Array):
+	var node = list[-1]
 	if node.playing: # 再生してたら止める
 		bgm_fade(node,"out")
 
@@ -141,3 +156,64 @@ func bgm_change(path):
 	node.stream = load(path)
 	node.play(seek)
 
+# loop_set : 一定周期でSEやVOICEを再生する
+#  L type : SEかVOICEか, id : ループするノードのID, time : ループ頻度, path_list : ランダムで再生する素材のリスト
+# random_array : Arrayの中から１つを返す
+# _timeout : タイマー切れの後SEを再生する
+# loop_end : loopseやvoiceを止める
+
+func loop_set(type,id,time,path_list):
+	var node_path
+	match type:
+		"SE":
+			node_path = str(loop_se_node_root) + "/Loop_SE_" + id
+		"VOICE":
+			node_path = str(loop_VOICE_node_root) + "/Loop_VOICE_" + id
+	var timer : Timer = get_node(node_path + "/Timer")
+	var sound_node : AudioStreamPlayer = get_node(node_path)
+	if timer.is_stopped() == false:
+		loop_end(type,id)
+	time = int(time)
+	path_list = JSON.parse_string(path_list)
+	sound_node.stream = load(random_array(path_list))
+	timer.timeout.connect(_timeout.bind(sound_node,time,path_list,node_path,timer))
+	sound_node.play(0)
+	timer.start(time)
+
+func random_array(list:Array):
+	randomize()
+	return list[randi() % list.size()]
+
+func _timeout(node,time,path_list,node_path,timer):
+	node.stream = load(random_array(path_list))
+	node.pitch_scale = randf_range(0.9,1.1)
+	node.play(0)
+	var random_zougen = randf_range(-1,1)
+	timer.start(time + random_zougen)
+
+func loop_end(type,id):
+	var node_path
+	match type:
+		"SE":
+			node_path = str(loop_se_node_root) + "/Loop_SE_" + id
+		"VOICE":
+			node_path = str(loop_VOICE_node_root) + "/Loop_VOICE_" + id
+	var timer : Timer = get_node(node_path + "/Timer")
+	timer.stop()
+
+# bgs_play : 普通に素材のパス入れるだけで良い
+
+func bgs_play(path):
+	var node = get_node(bgs_node_list[0])
+	node.stream = load(path)
+	node.play(0)
+	bgs_node_list.erase(node)
+	bgs_node_list.append(node)
+
+# se_play : 普通に素材のパス入れるだけで良い
+
+func se_play(path):
+	var node = get_node(str(loop_se_node_root) + "/SE")
+	node.stream = load(path)
+	node.play(0)
+	

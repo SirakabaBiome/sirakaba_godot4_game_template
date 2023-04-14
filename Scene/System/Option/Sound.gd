@@ -26,6 +26,7 @@ func volume_set():
 
 func audio_bus_set(type,volume):
 	var bus_index = AudioServer.get_bus_index(type)
+	volume = linear_to_db(volume)
 	AudioServer.set_bus_volume_db(bus_index,volume)
 
 func _on_volume_drag_ended(value_changed, node_name):

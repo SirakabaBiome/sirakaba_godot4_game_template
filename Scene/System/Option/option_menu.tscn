@@ -58,9 +58,9 @@ vertical_alignment = 1
 [node name="Master" type="HSlider" parent="TabContainer/Sound/Sound_Container/ALL"]
 unique_name_in_owner = true
 layout_mode = 2
-min_value = -60.0
-max_value = -1.0
-value = -1.0
+max_value = 1.0
+step = 0.05
+value = 0.6
 
 [node name="BGM" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
 layout_mode = 2
@@ -75,9 +75,9 @@ vertical_alignment = 1
 [node name="BGM" type="HSlider" parent="TabContainer/Sound/Sound_Container/BGM"]
 unique_name_in_owner = true
 layout_mode = 2
-min_value = -60.0
-max_value = -1.0
-value = -1.0
+max_value = 1.0
+step = 0.05
+value = 0.95
 
 [node name="BGS" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
 layout_mode = 2
@@ -92,9 +92,9 @@ vertical_alignment = 1
 [node name="BGS" type="HSlider" parent="TabContainer/Sound/Sound_Container/BGS"]
 unique_name_in_owner = true
 layout_mode = 2
-min_value = -60.0
-max_value = -1.0
-value = -1.0
+max_value = 1.0
+step = 0.05
+value = 0.95
 
 [node name="ME" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
 layout_mode = 2
@@ -109,9 +109,9 @@ vertical_alignment = 1
 [node name="ME" type="HSlider" parent="TabContainer/Sound/Sound_Container/ME"]
 unique_name_in_owner = true
 layout_mode = 2
-min_value = -60.0
-max_value = -1.0
-value = -1.0
+max_value = 1.0
+step = 0.05
+value = 0.95
 
 [node name="SE" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
 layout_mode = 2
@@ -126,9 +126,9 @@ vertical_alignment = 1
 [node name="SE" type="HSlider" parent="TabContainer/Sound/Sound_Container/SE"]
 unique_name_in_owner = true
 layout_mode = 2
-min_value = -60.0
-max_value = -1.0
-value = -1.0
+max_value = 1.0
+step = 0.05
+value = 0.95
 
 [node name="VOICE" type="HSplitContainer" parent="TabContainer/Sound/Sound_Container"]
 layout_mode = 2
@@ -143,9 +143,9 @@ vertical_alignment = 1
 [node name="VOICE" type="HSlider" parent="TabContainer/Sound/Sound_Container/VOICE"]
 unique_name_in_owner = true
 layout_mode = 2
-min_value = -60.0
-max_value = -1.0
-value = -1.0
+max_value = 1.0
+step = 0.05
+value = 0.95
 
 [node name="Visual" type="TabBar" parent="TabContainer"]
 visible = false
